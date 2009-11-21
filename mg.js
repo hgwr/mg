@@ -145,7 +145,7 @@ var Mg = {
     var handler;
 
     if (e.which == 3) {
-      e.preventDefault();     // TODO: 調べる
+      e.preventDefault();
       e.stopPropagation();
       chrome.extension.sendRequest({action: "remove_gesture_listener"});
       handler = Mg.gestureDefs[Mg.gesture];
@@ -155,7 +155,7 @@ var Mg = {
 
     if (Mg.clickGesturing) {
       document.oncontextmenu = function () { return false; };
-      e.preventDefault();     // TODO: 調べる
+      e.preventDefault();
       e.stopPropagation();
       Mg.clickGesturing = false;
       console.log("click " + Mg.gesture.toString());
