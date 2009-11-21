@@ -1,0 +1,12 @@
+{
+  "name": "mg",
+  "version": "0.1",
+  "description": "Mouse Gestures",
+  "content_scripts": [ {
+      "js": [ "mg.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_start"
+  } ],
+  "background_page": "background.html",
+  "permissions": [ "http://*/", "https://*/*", "tabs" ]
+}
