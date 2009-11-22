@@ -48,6 +48,10 @@ function newWindow() {
   chrome.windows.create({ url: "http://www.google.com/" });
 }
 
+function closeTab(tab) {
+  chrome.tabs.remove(tab.id);
+}
+
 function messageDispatcher(request, sender) {
   switch (request.action) {
   case "right_tab":
@@ -61,6 +65,9 @@ function messageDispatcher(request, sender) {
     break;
   case "new_window":
     newWindow();
+    break;
+  case "close_tab":
+    closeTab(sender.tab);
     break;
   }
 }
