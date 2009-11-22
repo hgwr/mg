@@ -1,8 +1,11 @@
-CHROME=/opt/google/chrome/google-chrome
+#!/bin/bash
 
-if [ -d build ]; then
+CHROME=/opt/google/chrome/google-chrome
+APP=mg
+
+if [ \! -d build ]; then
   mkdir build
 fi
 
-git-archive --format=tar --prefix=build/mg/ HEAD | tar xvf -
-# $CHROME --pack-extension=build/mg --pack-extension-key=../mg.pem
+git-archive --format=tar --prefix="build/${APP}/" HEAD | tar xvf -
+# $CHROME --pack-extension="build/${APP}" --pack-extension-key="../${APP}.pem"
