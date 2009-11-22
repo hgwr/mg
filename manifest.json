@@ -1,6 +1,6 @@
 {
   "name": "mg",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Mouse Gestures",
   "update_url": "http://www.moreslowly.jp/chrome/extensions/mg/updates.xml",
   "content_scripts": [ {
