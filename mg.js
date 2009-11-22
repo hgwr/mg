@@ -14,8 +14,7 @@ var MgActions = {
     window.open("about:blank");
   },
   closeTab: function() {
-    window.open("", "_self");
-    self.close();
+    chrome.extension.sendRequest({action: "close_tab"});
   },
   historyBack: function() {
     history.back();
