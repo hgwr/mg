@@ -30,6 +30,13 @@ var MgActions = {
   },
   leftTab: function() {
     chrome.extension.sendRequest({action: "left_tab"});
+  },
+  goToTop: function() {
+    window.scrollTo(0, 0);
+  },
+  goToBottom: function() {
+    var root = document.documentElement;
+    window.scrollTo(0, root.scrollHeight - root.clientHeight);
   }
 };
 
@@ -46,12 +53,14 @@ var Mg = {
     "U,L": MgActions.leftTab,
     "U,R": MgActions.rightTab,
     "D,R": MgActions.closeTab,
-    "U,D": MgActions.reload
+    "U,D": MgActions.reload,
+    "U,D,U": MgActions.goToTop,
+    "D,U,D": MgActions.goToBottom
   },
   thresholds: {
     click: 1000,
     time: 30,
-    squareOfDistance: 50
+    squareOfDistance: 64
   },
   pb: null,  // Type of the butotn pressed before
   px: 0,
@@ -79,10 +88,10 @@ var Mg = {
 
   mousemove: function(e) {
     var now = new Date(),
-    x = e.clientX,
-    y = e.clientY,
-    dt = now.getTime() - Mg.past.getTime(),
-    dx, dy, motion;
+      x = e.clientX,
+      y = e.clientY,
+      dt = now.getTime() - Mg.past.getTime(),
+      dx, dy, motion;
     if (dt < Mg.thresholds.time) {
       return;
     } else {
@@ -116,7 +125,7 @@ var Mg = {
 
   mousedown: function(e) {
     var now = new Date(),
-    dt = now.getTime() - Mg.past.getTime();
+      dt = now.getTime() - Mg.past.getTime();
 
     if (e.which == 3) {
       document.oncontextmenu = function () { return true; };
@@ -178,12 +187,21 @@ var Mg = {
     case "remove_gesture_listener":
       Mg.removeGestureListener();
       break;
+    case "update_parameter":
+      Mg.thresholds = request.data.thresholds;
+      break;
     }
   }
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-                            window.addEventListener("mousedown", Mg.mousedown, false);
-                            window.addEventListener("mouseup", Mg.mouseup, false);
-                            chrome.extension.onRequest.addListener(Mg.requestHandler);
-                          });
+  chrome.extension.sendRequest(
+    {action: "get_parameter"},
+    function (response) {
+      Mg.thresholds = response.thresholds;
+    });
+  
+  window.addEventListener("mousedown", Mg.mousedown, false);
+  window.addEventListener("mouseup", Mg.mouseup, false);
+  chrome.extension.onRequest.addListener(Mg.requestHandler);
+});

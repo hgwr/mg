@@ -1,0 +1,36 @@
+<html><head>
+<style type="text/css">
+ul {
+	padding: 0em;
+}
+li {
+  list-style-type: none;
+	padding-left: 0.5em;
+}
+</style>
+<script type="text/javascript" src="options.js"></script>
+<title>Mg Options</title>
+</head>
+<body>
+<h2>Mg Options</h2>
+<form>
+
+<ul>
+  <li> maximum click interval (ms)
+  <input type="text" id="thresholds_click" size="4">
+  (default 1000)
+
+  <li> motion time limit (ms)
+  <input type="text" id="thresholds_time" size="4">
+  (default 30)
+
+  <li> gesture sensitivity; square of distance (pixel)
+  <input type="text" id="thresholds_squareOfDistance" size="4">
+  (default 64)
+</ul>
+
+<input type="button" id="update" value="Update">
+<input type="button" id="restoreDefaults" value="Restore Default">
+
+</form>
+</body></html>
