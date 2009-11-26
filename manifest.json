@@ -1,6 +1,6 @@
 {
   "name": "mg",
-  "version": "0.3",
+  "version": "0.4",
   "description": "Mouse Gestures",
   "background_page": "background.html",
   "content_scripts": [ {
